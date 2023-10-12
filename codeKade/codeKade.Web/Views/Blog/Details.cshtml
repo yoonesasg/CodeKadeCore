@@ -1,0 +1,498 @@
+﻿@using codeKade.Application.PathExtentions
+@using codeKade.DataLayer.Entities.Blog
+@using codeKade.DataLayer.Entities.Comment
+@using PersianDate.Standard
+@model codeKade.DataLayer.Entities.Blog.Blog
+@{
+    ViewData["Title"] = "مشاهده بلاگ" + " " + Model.Title;
+    var Categories = ViewBag.Categories as List<BlogCategory>;
+    var MostSeen = ViewBag.MostSeenBlog as List<Blog>;
+    var Comments = ViewBag.Comments as List<BlogComment>;
+}
+
+<!--================================
+    START BREADCRUMB AREA
+=================================-->
+<section class="breadcrumb-area dir-rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"] </h1>
+                <div class="breadcrumb">
+                    <ul>
+                        <li>
+                            <a href="index.html">بلاگ</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">@ViewData["Title"] </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<!--================================
+    END BREADCRUMB AREA
+=================================-->
+
+<!--================================
+        START LOGIN AREA
+=================================-->
+<section class="blog_area section--padding2 dir-rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single_blog blog--default">
+                    <article>
+                        <figure>
+                            <img src="@(Model.ImageName != null ? PathTools.BlogImagePath + Model.ImageName : PathTools.DefaultBlogImage)" alt="@Model.Title">
+                        </figure>
+                        <div class="blog__content">
+                            <a href="#" class="blog__title">
+                                <h4>@Model.Title</h4>
+                            </a>
+
+                            <div class="blog__meta mt-3">
+                                <div class="author">
+                                    <span class="lnr lnr-user"></span>
+                                    <p>
+                                        <a href="#">@(Model.User.FirstName + " " + Model.User.LastName) </a>
+                                    </p>
+                                </div>
+                                <div class="date_time">
+                                    <span class="lnr lnr-clock"></span>
+                                    <p> @Model.CreateDate.ToFa("B")
+                                    </p>
+                                </div>
+                                <div class="comment_view">
+                                    
+                                    <p class="view">
+                                        <span class="lnr lnr-eye"></span>@Model.Seen</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single_blog_content">
+                            @Html.Raw(Model.Body)
+
+                            <div class="share_tags">
+                                <div class="share">
+                                    <p>این اعلان را به اشتراک گذارید</p>
+                                    <div class="social_share active">
+                                        <ul class="social_icons">
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fa fa-facebook"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fa fa-twitter"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fa fa-google-plus"></span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="fa fa-linkedin"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- end social_share -->
+                                </div>
+                                <!-- end bog_share_ara  -->
+
+                                <div class="tags">
+                                    <ul>
+                                        <li>
+                                            <a href="#">طراحی</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">ورد پرس</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <!-- end /.single_blog -->
+
+                <div class="author_info">
+                    <div class="author__img">
+                        <img src="@(Model.User.Avatar != null ? PathTools.UserImagePath + Model.User.Avatar : PathTools.DefaultUserImage)" alt="@(Model.User.FirstName + " " +Model.User.LastName)">
+                    </div>
+
+                    <div class="author__info">
+                        <h4>
+                             نویسنده : @(Model.User.FirstName + " " + Model.User.LastName)
+                           
+                        </h4>
+                        <p>
+                            @Model.User.Description
+                        </p>
+                        <ul>
+                            @if (Model.User.InstagramId != null)
+                            {
+                                <li>
+                                    <a href="https://instagram.com/@Model.User.InstagramId">
+                                        <span class="fa fa-instagram"></span>
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.User.TelegramId != null)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <span class="fa fa-telegram"></span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <!-- end /.author_info -->
+
+                <div class="comment_area">
+                    <div class="comment__title">
+                        <h4>نظرات </h4>
+                    </div>
+
+                    <div class="comment___wrapper">
+                        <ul class="media-list">
+                            @if (Comments.Count > 0)
+                            {
+                                @foreach (var comment in Comments.Where(c=>c.ParentId == null))
+                            {
+                                <li class="depth-1">
+                                    <div class="media">
+                                        <div class="pull-right no-pull-xs">
+                                            <a href="#" class="cmnt_avatar">
+                                                <img style="width:90px;height:90px" src="@(comment.User.Avatar != null ? PathTools.UserImagePath + comment.User.Avatar : PathTools.DefaultUserImage)" class="media-object" alt="Sample Image">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="media_top">
+                                                <div class="heading_left pull-right">
+                                                    <a href="#">
+                                                        <h4 class="media-heading">@(comment.User.FirstName + " " +comment.User.LastName)</h4>
+                                                    </a>
+                                                    <span>@comment.CreateDate.ToFa("f")</span>
+                                                </div>
+                                                
+                                                <a onclick="FillAnswerBox(@comment.ID)" href="#cmtForm" class="reply hidden-xs-m pull-left">پاسخ </a>
+                                            </div>
+                                            <p>
+                                                @comment.Text
+                                            </p>
+                                            <a href="#" class="reply visible-xs-m  pull-left">پاسخ </a>
+                                        </div>
+                                    </div>
+                                    @if (Comments.Any(c => c.ParentId == comment.ID))
+                                    {
+                                        <ul class="children">
+                                            @foreach (var child in Comments.Where(c => c.ParentId == comment.ID)) {
+                                            <!-- Nested media object -->
+                                            <li class="depth-2">
+                                                <div class="media">
+                                                    <div class="pull-right no-pull-xs">
+                                                        <a href="#" class="cmnt_avatar">
+                                                            <img style="width:90px;height:90px" src="@(child.User.Avatar != null ? PathTools.UserImagePath + child.User.Avatar : PathTools.DefaultUserImage)" class="media-object" alt="Sample Image">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="media_top">
+                                                            <div class="heading_left pull-right">
+                                                                <a href="#">
+                                                                    <h4 class="media-heading">@(child.User.FirstName + " " +child.User.LastName) </h4>
+                                                                </a>
+                                                                <span>@child.CreateDate.ToFa("f")</span>
+                                                            </div>
+                                                           
+                                                           
+                                                        </div>
+                                                        <p>
+                                                            @child.Text
+                                                        </p>
+                                                        <a href="#" class="reply visible-xs-m pull-left">پاسخ </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                            }
+                            else
+                            {
+                                <div class="alert alert-primary">
+                                    <p> نظری برای این مقاله ثبت نشده است</p>
+                                </div>
+                            }
+                        </ul>
+                    </div>
+                    <!-- end /.comment___wrapper -->
+                </div>
+                <!-- end /.col-md-8 -->
+
+                <div class="comment_area comment--form">
+                    <!-- start reply_form -->
+                    <div class="comment__title">
+                        <h4>نظر خود را بنویسید </h4>
+                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="commnet_form_wrapper">
+                            <div class="row">
+                                <!-- start form -->
+                                <form class="cmnt_reply_form" asp-action="AddComment" method="post" id="#cmtForm">
+                                    <input name="comments.ParentId" type="hidden" id="answer"/>
+                                    <input name="comments.BLogId" type="hidden" value="@Model.ID"/>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <textarea class="input_field" name="comments.Text" placeholder="متن خود را بنویسید " rows="10" cols="80"></textarea>
+                                        </div>
+
+                                        <button type="submit" class="btn btn--round btn--default" name="btn">ثبت نظر </button>
+                                    </div>
+                                </form>
+                                <!-- end form -->
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            برای افزودن نظر ابتدا <a href="/login">وارد</a> حساب کاربری خود شوید
+                        </div>
+                    }
+                    <!-- end /.commnet_form_wrapper -->
+                </div>
+                <!-- end /.comment_area_wrapper -->
+            </div>
+            <!-- end /.col-md-8 -->
+
+            <div class="col-lg-4">
+                <aside class="sidebar sidebar--blog">
+                    <div class="sidebar-card card--search card--blog_sidebar">
+                        <div class="card-title">
+                            <h4>جستحو در مقالات </h4>
+                        </div>
+                        <!-- end /.card-title -->
+
+                        <div class="card_content">
+                            <form action="#">
+                                <div class="searc-wrap">
+                                    <input type="text" placeholder="عنوان مقاله را وارد کنید...">
+                                    <button type="submit" class="search-wrap__btn">
+                                        <span class="lnr lnr-magnifier"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end /.card_content -->
+                    </div>
+                    <!-- end /.sidebar-card -->
+
+                    <div class="sidebar-card sidebar--post card--blog_sidebar">
+                        <div class="card-title">
+                            <!-- Nav tabs -->
+                            <ul class="nav post-tab" role="tablist">
+                                
+                                <li>
+                                    <a href="#latest" id="latest-tab" aria-controls="latest" role="tab" data-toggle="tab" aria-selected="false">پر بازدید ترین مقالات </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end /.card-title -->
+
+                        <div class="card_content">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active fade show" id="popular" aria-labelledby="popular-tab">
+                                    <ul class="post-list">
+                                        @foreach(var blog in MostSeen){
+                                        <li>
+                                            <div class="thumbnail_img">
+                                                <img src="@(blog.ImageName != null ? PathTools.BlogThumbImagePath + blog.ImageName : PathTools.DefaultBlogImage)" alt="@blog.Title">
+                                            </div>
+                                            <div class="title_area">
+                                                <a asp-action="Details" asp-route-id="@blog.ID">
+                                                    <h4> @blog.Title </h4>
+                                                </a>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-clock"></span>
+                                                    <p>@blog.CreateDate.ToFa("B")</p>
+                                                </div>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-eye"></span>
+                                                    <p>@blog.Seen</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        }
+                                    </ul>
+                                    <!-- end /.post-list -->
+                                </div>
+                                <!-- end /.tabpanel -->
+
+                                <div role="tabpanel" class="tab-pane fade" id="latest" aria-labelledby="latest-tab">
+                                    <ul class="post-list">
+                                        <li>
+                                            <div class="thumbnail_img">
+                                                <img src="/images/new/blog_thumb2.jpg" alt="blog thumbnail">
+                                            </div>
+                                            <div class="title_area">
+                                                <a href="#">
+                                                    <h4>10  قالب جوملا رایگان!
+                                                         
+                                                    </h4>
+                                                </a>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-clock"></span>
+                                                    <p>5 خرداد 97</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumbnail_img">
+                                                <img src="/images/new/blog_thumb2.jpg" alt="blog thumbnail">
+                                            </div>
+                                            <div class="title_area">
+                                                <a href="#">
+                                                    <h4>بهترین  پلاگین رایگان  گالری عکس </h4>
+                                                </a>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-clock"></span>
+                                                    <p>5 خرداد 97</p>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="thumbnail_img">
+                                                <img src="/images/new/blog_thumb1.jpg" alt="blog thumbnail">
+                                            </div>
+                                            <div class="title_area">
+                                                <a href="#">
+                                                    <h4>5 بهترین پلاگین اعتبار سنجی فرم جی کوئری </h4>
+                                                </a>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-clock"></span>
+                                                    <p>5 خرداد 97</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="thumbnail_img">
+                                                <img src="/images/new/blog_thumb2.jpg" alt="blog thumbnail">
+                                            </div>
+                                            <div class="title_area">
+                                                <a href="#">
+                                                    <h4>10  قالب جوملا رایگان!
+                                                         
+                                                    </h4>
+                                                </a>
+                                                <div class="date_time">
+                                                    <span class="lnr lnr-clock"></span>
+                                                    <p>5 خرداد 97</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>                                    <!-- end /.post-list -->
+                                </div>
+                                <!-- end /.tabpanel -->
+                            </div>
+                            <!-- end /.tab-content -->
+                        </div>
+                        <!-- end /.card_content -->
+                    </div>
+                    <!-- end /.sidebar-card -->
+
+                    <div class="sidebar-card card--blog_sidebar card--category">
+                        <div class="card-title">
+                            <h4>دسته بندی ها </h4>
+                        </div>
+                        <div class="collapsible-content">
+                            <ul class="card-content">
+                                @foreach (var category in Categories)
+                                {
+                                    <li>
+                                        <a href="#">
+                                            <span class="lnr lnr-chevron-right"></span>
+                                            @category.Title
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- end /.collapsible_content -->
+                    </div>
+                    <!-- end /.sidebar-card -->
+
+                    <div class="sidebar-card card--blog_sidebar card--tags">
+                        <div class="card-title">
+                            <h4>برچسب ها </h4>
+                        </div>
+
+                        <ul class="tags">
+                            <li>
+                                <a href="#">طراحی</a>
+                            </li>
+                            <li>
+                                <a href="#">قالب سایت </a>
+                            </li>
+                            <li>
+                                <a href="#">چند فروشندگی</a>
+                            </li>
+                            <li>
+                                <a href="#">طراحی تم </a>
+                            </li>
+
+                            <li>
+                                <a href="#">وردپرس</a>
+                            </li>
+                        </ul>
+                        <!-- end /.tags -->
+                    </div>
+                    <!-- end /.sidebar-card -->
+
+                    <div class="banner">
+                        <img src="/images/new/banner.jpg" alt="Banner">
+                        <div class="banner_content">
+                            <h1>بنر</h1>
+                            <p>360x270</p>
+                        </div>
+                    </div>
+                    <!-- end /.banner -->
+                </aside>
+                <!-- end /.aside -->
+            </div>
+            <!-- end /.col-md-4 -->
+
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<!--================================
+        END LOGIN AREA
+=================================-->
+@section Scripts{
+    <script>
+        function FillAnswerBox(id) {
+            $("#answer").val(id);
+        }
+    </script>
+}
+

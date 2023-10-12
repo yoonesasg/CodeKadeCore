@@ -1,0 +1,129 @@
+﻿@using PersianDate.Standard
+@model codeKade.DataLayer.DTOs.Event.FilterEventDTO
+@{
+    ViewData["Title"] = "رویداد های حذف شده";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="page-title m-0">@ViewData["Title"]</h4>
+                </div>
+
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title-box -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title"> جستجوی رویداد </h4>
+
+                <form asp-area="Admin" asp-controller="Event" asp-action="DeletedEvents" method="get" id="filter-form">
+                    <input type="hidden" asp-for="PageID" id="PageID"/>
+                    <div class="form-group col-6">
+                        <label> نام</label>
+                        <input class="form-control" type="text" placeholder="برای مثال : کد کده" asp-for="Title">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="جستجو"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <a asp-action="Add" class="btn btn-primary text-white">افزودن رویداد جدید</a>
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>عنوان </th>
+                                <th> بازدید</th>
+                                <th>وضعیت</th>
+                                <th> تاریخ شروع</th>
+                                <th>قیمت</th>
+                                <th>تعداد ثبت نام کنندگان</th>
+                                <th>محل برگذاری</th>
+                                <th> اقدامات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Events.Count == 0)
+                            {
+                                <div class="alert alert-warning">
+                                    <p><i class="dripicons-warning"></i>   متاسفانه مقاله ای پیدا نشد</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var singleEvent in Model.Events)
+                                {
+                                    <tr id="@singleEvent.ID">
+                                        <th scope="row">@singleEvent.ID</th>
+                                        <td>@singleEvent.Title</td>
+                                        <td>@singleEvent.Seen</td>
+                                        <td class="@(singleEvent.IsActive ? "text-success" : "text-danger")">@(singleEvent.IsActive ? "فعال" : "غیرفعال")</td>
+                                        <td>@singleEvent.StartDate.ToFa("B")</td>
+                                        <td>@(singleEvent.Price != 0 ? singleEvent.Price : "رایگان")</td>
+                                        <td>@singleEvent.NumOfParticipants</td>
+                                        <td>@singleEvent.LocationName</td>
+                                        <td>
+                                            <a onclick="RestoreEvent(@singleEvent.ID)" class="btn btn-danger text-white">بازگشت</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<partial name="_AdminPaging" model="Model.GetCurrentPaging()"/>
+
+<div id="UserDetail"></div>
+<div id="AddUser"></div>
+<div id="EditUser"></div>
+
+@section Scripts{
+    <script>
+        function FillPageId(page) {
+            $("#PageID").val(page);
+            $("#filter-form").submit();
+        }
+
+       
+        function RestoreEvent(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/event/Restore/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+    </script>
+}
+
+

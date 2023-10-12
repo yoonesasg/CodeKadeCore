@@ -1,0 +1,165 @@
+﻿@using PersianDate.Standard
+@using codeKade.DataLayer.Entities.Event
+@using codeKade.Application.PathExtentions
+@model codeKade.DataLayer.DTOs.Event.FilterEventDTO
+@{
+    ViewData["Title"] = "رویداد ها";
+    var bigEvent = ViewBag.bigEvent as Event;
+}
+<section class="breadcrumb-area dir-rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">رویداد ها </h1>
+                <div class="breadcrumb">
+                    <ul>
+                        <li>
+                            <a href="index.html">خانه</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">رویداد ها </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<section class="event_area section--padding2 dir-rtl">
+    <div class="container">
+        <form id="filter-form" asp-action="Index" method="get">
+            <label>جستجو در رویداد ها :</label>
+            <input type="text" asp-for="Title" class="w-25" />
+            <input type="hidden" asp-for="PageID" />
+            <button class="btn btn-primary p-2" type="submit">جستجو</button>
+        </form>
+        <br/>
+        @if (bigEvent != null)
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="featured_event">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="event_img">
+                                    <img src="@(PathTools.EventImagePath + bigEvent.ImageName)" alt="event thumbnail">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="featured_event_detail">
+                                    <h1>@bigEvent.Title </h1>
+                                    <ul class="date_place">
+                                        <li>
+                                            <span class="lnr lnr-calendar-full"></span>
+                                            <p>@bigEvent.StartDate.ToFa()</p>
+                                        </li>
+                                        <li>
+                                            <span class="lnr lnr-map-marker"></span>
+                                            <p>@bigEvent.LocationName </p>
+                                        </li>
+                                    </ul>
+                                    <ul class="countdown"><li>00 <span>روز </span></li> <li>00 <span>ساعت</span></li> <li>00 <span>دقیقه</span></li> <li>00 <span>ثانیه</span></li> </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Events.Any())
+        {
+            <div class="row">
+                @foreach (var single_event in Model.Events)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card_style1">
+                            <figure class="card_style1__info">
+                                <img src="@(PathTools.EventThumbImagePath + single_event.ImageName)" alt="Event card thumbnail">
+
+                                <figcaption>
+                                    <a asp-action="Details" asp-route-id="@single_event.ID">
+                                        <h3>@single_event.Title </h3>
+                                    </a>
+                                    <ul class="date_place">
+                                        <li>
+                                            <span class="lnr lnr-calendar-full"></span>
+                                            <p>@single_event.StartDate.ToFa()</p>
+                                        </li>
+                                        <li>
+                                            <span class="lnr lnr-map-marker"></span>
+                                            <p>@single_event.LocationName </p>
+                                        </li>
+                                    </ul>
+                                </figcaption>
+                                <!-- end /.figcaption -->
+                            </figure>
+                            <!-- end /.figure -->
+                        </div>
+                        <!-- end /.event_card -->
+                    </div>
+                    <!-- end /.col-lg-4 col-md-6 -->
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-primary">متاسفانه رویدادی یافت نشد</div>
+        }
+        <!-- end /.row -->
+        <div class="pagination-area pagination-area2">
+            <nav class="navigation pagination " role="navigation">
+                <div class="nav-links">
+                    @if (Model.StartPage != 1)
+                    {
+                        <a class="prev page-numbers" onclick="FillPageId(1)">
+                            <span class="lnr lnr-arrow-right"></span>
+                        </a>
+                    }
+                    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                    {
+                        <a class="page-numbers @(i == Model.PageID ? "current bg-primary color-white" : "")" onclick="FillPageId(@i)">@i</a>
+                    }
+                    @if (Model.EndPage != Model.PageCount)
+                    {
+                        <a class="prev page-numbers" onclick="FillPageId(@Model.PageCount)">
+                            <span class="lnr lnr-arrow-left"></span>
+                        </a>
+                    }
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- end /.container -->
+</section>
+
+@section Scripts
+    {
+    @if (bigEvent != null)
+    {
+        <script>
+            /* COUNTDOWN INIT */
+            $('.countdown').countdown('@(bigEvent.StartDate)', function(event) {
+                var $this = $(this).html(event.strftime(''
+                    + '<li>%D <span>روز </span></li>  '
+                    + '<li>%H <span>ساعت</span></li>  '
+                    + '<li>%M <span>دقیقه</span></li>  '
+                    + '<li>%S <span>ثانیه</span></li> '));
+            });
+        </script>
+    }
+
+    <script>
+        function FillPageId(page) {
+            $('#PageID').val(page);
+            $('#filter-form').submit();
+        }
+    </script>
+
+}
+
+

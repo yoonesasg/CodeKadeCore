@@ -1,0 +1,85 @@
+﻿@model codeKade.DataLayer.Entities.Cooperation.Cooperation
+@{
+    ViewData["Title"] = "همکاری با ما";
+}
+
+<!--================================
+    START BREADCRUMB AREA
+=================================-->
+<section class="breadcrumb-area dir-rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-title">@ViewData["Title"] </h1>
+                <div class="breadcrumb">
+                    <ul>
+                        <li>
+                            <a href="index.html">خانه</a>
+                        </li>
+                        <li>
+                            <a href="dashboard.html">@ViewData["Title"] </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- end /.col-md-12 -->
+        </div>
+        <!-- end /.row -->
+    </div>
+    <!-- end /.container -->
+</section>
+<!--================================
+    END BREADCRUMB AREA
+=================================-->
+<!--================================
+        START LOGIN AREA
+=================================-->
+<section class="login_area section--padding2 dir-rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 block">
+                @if (ViewBag.IsSent == false)
+                {
+                    <form asp-action="Cooperation" method="post">
+                        <div class="cardify login">
+                            <div class="login--header">
+                                <h3>یک بیوگرافی از تخصص خود وارد کنید</h3>
+                                <p>پس از تایید مشخصات شما همکاران ما با شماره تماس شما تماس میگیرند</p>
+                            </div>
+                            <!-- end .login_header -->
+                            <div class="login--form">
+                                <div class="form-group">
+                                    <label>توضیحات</label>
+                                    <textarea asp-for="Biography"></textarea>
+                                    <span class="text-danger" asp-validation-for="Biography"></span>
+                                </div>
+
+
+
+                                <button class="btn btn--md btn--round" type="submit">ثبت </button>
+
+                            </div>
+                            <!-- end .login--form -->
+                        </div>
+                        <!-- end .cardify -->
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-primary">درخواست شما ارسال شده است در صورت موافقت با شما تماس گرفته میشود</div>
+                }
+            </div>
+            <!-- end .col-md-6 -->
+        </div>
+        <!-- end .row -->
+    </div>
+    <!-- end .container -->
+</section>
+<!--================================
+        END LOGIN AREA
+=================================-->
+@section css{
+    <link href="css/BorderAnimate.css" rel="stylesheet" />
+}
+

@@ -1,0 +1,139 @@
+﻿@using PersianDate.Standard
+@model List<codeKade.DataLayer.Entities.User.Role>
+@{
+    ViewData["Title"] = "نقش ها";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="page-title m-0">@ViewData["Title"]</h4>
+                </div>
+
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title-box -->
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <a onclick="ShowAddRole()" class="btn btn-primary text-white">افزودن نقش جدید</a>
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>عنوان </th>
+                                <th>خدمات </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count == 0)
+                            {
+                                <div class="alert alert-warning">
+                                    <p><i class="dripicons-warning"></i>   متاسفانه نقشی پیدا نشد</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var role in Model)
+                                {
+                                    <tr id="@role.ID">
+                                        <th scope="row">@role.ID</th>
+                                        <td>@role.RoleTitle</td>
+                                        <td>
+                                            <a onclick="ShowPermissions(@role.ID)" class="btn btn-primary text-white"> دسترسی ها </a>
+                                            <a onclick="ShowEditRole(@role.ID)" class="btn btn-warning text-white">ویرایش</a>
+                                            <a onclick="DeleteRole(@role.ID)" class="btn btn-danger text-white">حذف</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+
+<div id="AddRole"></div>
+<div id="EditRole"></div>
+<div id="Permissions"></div>
+
+@section Scripts{
+    <script>
+        function FillPageId(page) {
+            $("#PageID").val(page);
+            $("#filter-form").submit();
+        }
+
+       
+        function DeleteRole(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Role/DeleteRole/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowAddRole() {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Role/AddRole/",
+                data: null,
+                success: function(data) {
+                    $("#AddRole").html(data);
+                    $('#AddModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function ShowEditRole(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Role/EditRole/"+id,
+                data: id,
+                success: function(data) {
+                    $("#EditRole").html(data);
+                    $('#EditModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowPermissions(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Role/Permissions/"+id,
+                data: id,
+                success: function(data) {
+                    $("#Permissions").html(data);
+                    $('#ListModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function CloseModal() {
+            var modalToggle = document.getElementById('Modal');
+            modalToggle.hide();
+        }
+    </script>
+}
+
+
+
+

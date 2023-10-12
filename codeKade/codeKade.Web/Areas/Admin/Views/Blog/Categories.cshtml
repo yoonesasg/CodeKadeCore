@@ -1,0 +1,129 @@
+﻿@model List<codeKade.DataLayer.Entities.Blog.BlogCategory>
+@{
+    ViewData["Title"] = "دسته بندی ها";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="page-title m-0">@ViewData["Title"]</h4>
+                </div>
+
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title-box -->
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <a onclick="ShowAddCategory()" class="btn btn-primary text-white">افزودن دسته بندی جدید</a>
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>عنوان </th>
+                                <th>فرایند </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count == 0)
+                            {
+                                <div class="alert alert-warning">
+                                    <p><i class="dripicons-warning"></i>   متاسفانه دسته بندی ای پیدا نشد</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var category in Model)
+                                {
+                                    <tr id="@category.ID">
+                                        <th scope="row">@category.ID</th>
+                                        <td>@category.Title</td>
+                                        
+                                        <td>
+                                            <a onclick="ShowEditCategory(@category.ID)" class="btn btn-warning text-white">ویرایش</a>
+                                            <a onclick="ShowDeleteCategory(@category.ID)" class="btn btn-danger text-white">حذف</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<div id="AddCategory"></div>
+<div id="EditCategory"></div>
+<div id="DeleteCategory"></div>
+
+@section Scripts{
+    <script>
+        function FillPageId(page) {
+            $("#PageID").val(page);
+            $("#filter-form").submit();
+        }
+
+        function ShowAddCategory() {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Blog/AddCategory/",
+                data: null,
+                success: function(data) {
+                    $("#AddCategory").html(data);
+                    $('#AddModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+       
+        function DeleteUser(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/blog/Delete/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function ShowEditCategory(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/blog/EditCategory/"+id,
+                data: id,
+                success: function(data) {
+                    $("#EditCategory").html(data);
+                    $('#EditModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function ShowDeleteCategory(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/blog/DeleteBlogCategory/"+id,
+                data: id,
+                success: function(data) {
+                    $("#DeleteCategory").html(data);
+                    $('#DeleteModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+    </script>
+}
+
+

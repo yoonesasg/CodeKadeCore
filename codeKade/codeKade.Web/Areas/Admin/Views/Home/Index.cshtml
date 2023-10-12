@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+<div class="row">
+                            <div class="col-sm-12">
+                                <div class="page-title-box">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h4 class="page-title m-0">داشبورد</h4>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="float-right d-none d-md-block">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="ti-settings mr-1"></i> تنظیمات
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated">
+                                                        <a class="dropdown-item" href="#">عملیات</a>
+                                                        <a class="dropdown-item" href="#">اقدام دیگر</a>
+                                                        <a class="dropdown-item" href="#">چیز های دیگر</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">پیوند جدا شده</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+                                </div>
+                                <!-- end page-title-box -->
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+<div class="row">
+    @*for users*@
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary mini-stat text-white">
+            <div class="p-3 mini-stat-desc">
+                <div class="clearfix">
+                    <h6 class="text-uppercase mt-0 float-left text-white-50">کاربران ثبت نام شده در امروز</h6>
+                    <h4 class="mb-3 mt-0 float-right">@ViewBag.CountOfTodayUsers</h4>
+                </div>
+
+
+            </div>
+            <div class="p-3">
+                <div class="float-right">
+                    <a asp-controller="User" asp-area="Admin"  class="btn btn--white bg-white">مشاهده کاربران</a>
+                </div>
+                <p class="font-14 m-0">کل کاربران : @ViewBag.CountOfUsers</p>
+            </div>
+        </div>
+    </div>
+    
+    @*for blogs*@
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-info mini-stat text-white">
+            <div class="p-3 mini-stat-desc">
+                <div class="clearfix">
+                    <h6 class="text-uppercase mt-0 float-left text-white-50">مقالات منتشر شره در امروز</h6>
+                    <h4 class="mb-3 mt-0 float-right"> @ViewBag.CountOfTodayBlogs </h4>
+                </div>
+                <div class="clearfix">
+                    <h6 class="text-uppercase mt-0 float-left text-white-50"> نظرات جدید امروز </h6>
+                    <h4 class="mb-3 mt-0 float-right"> @ViewBag.BlogCommentsToday </h4>
+                </div>
+            </div>
+            <div class="p-3">
+                <div class="float-right">
+                    <a asp-controller="Blog" class="btn btn--white bg-white">مشاهده مقالات</a>
+                    <a href="#" class="btn btn--white bg-white"> مشاهده نظرات جدید </a>
+                </div>
+                <p class="font-14 m-0">کل مقالات : @ViewBag.CountOfBlogs</p>
+            </div>
+        </div>
+    </div>
+    
+    @*for event comments*@
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-pink mini-stat text-white">
+            <div class="p-3 mini-stat-desc">
+                <div class="clearfix">
+                    <h6 class="text-uppercase mt-0 float-left text-white-50"> نظرات رویداد امروز </h6>
+                    <h4 class="mb-3 mt-0 float-right">@ViewBag.CountOfTodayEventComments</h4>
+                </div>
+               
+            </div>
+            <div class="p-3">
+                <div class="float-right">
+                    <a href="#" class="btn btn--white bg-white">مشاهده نظرات</a>
+                </div>
+                <p class="font-14 m-0">کل نظرات : @ViewBag.CountOfEventComments</p>
+            </div>
+        </div>
+    </div>
+    
+    @*for blog comments*@
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success mini-stat text-white">
+            <div class="p-3 mini-stat-desc">
+                <div class="clearfix">
+                    <h6 class="text-uppercase mt-0 float-left text-white-50"> ثبت نام های رویداد امروز </h6>
+                    <h4 class="mb-3 mt-0 float-right">1890</h4>
+                </div>
+               
+            </div>
+            <div class="p-3">
+                <div class="float-right">
+                    <a href="#" class="btn btn--white bg-white">مشاهده ثبت نام ها</a>
+                </div>
+                <p class="font-14 m-0">کل ثبت نام ها : 1776</p>
+            </div>
+        </div>
+    </div>
+</div>
+                        <!-- end row -->
+

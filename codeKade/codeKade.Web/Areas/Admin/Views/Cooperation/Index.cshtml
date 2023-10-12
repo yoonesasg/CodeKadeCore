@@ -1,0 +1,176 @@
+﻿@using PersianDate.Standard
+@model codeKade.DataLayer.DTOs.Cooperarion.FilterCooperationDTO
+@{
+    ViewData["Title"] = "همکاری با ما";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="page-title m-0">@ViewData["Title"]</h4>
+                </div>
+
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title-box -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title"> جستجوی درخواست </h4>
+
+                <form asp-area="Admin" asp-controller="School" asp-action="Index" method="get" id="filter-form">
+                    <input type="hidden" asp-for="PageID" id="PageID"/>
+                    <div class="form-group col-6">
+                        <label> نام</label>
+                        <input class="form-control" type="text" placeholder="برای مثال : محمد محمدی" asp-for="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="جستجو"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th> نام و نام خانوادگی </th>
+                                <th> شماره تلفن </th>
+                                <th>تاریخ ثبت </th>
+                                <th> وضعیت </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Cooperations.Count == 0)
+                            {
+                                <div class="alert alert-warning">
+                                    <p><i class="dripicons-warning"></i>   متاسفانه درخواست پیدا نشد</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var cooperation in Model.Cooperations)
+                                {
+                                    <tr id="@cooperation.ID">
+                                        <th scope="row">@cooperation.ID</th>
+                                        <td>@(cooperation.User.FirstName + " " + cooperation.User.LastName)</td>
+                                        <td>@cooperation.User.Mobile</td>
+                                        <td>@cooperation.CreateDate.ToFa()</td>
+                                        <td class="text-@(cooperation.Seen ? "success" : "danger")">@(cooperation.Seen ? "مشاهده شده" : "مشاهده نشده")</td>
+                                        <td>
+                                            <a onclick="ShowCooperation(@cooperation.ID)" class="btn btn-primary text-white"> مشاهده </a>
+                                            <a onclick="ShowDelete(@cooperation.ID)" class="btn btn-danger text-white">حذف</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<partial name="_AdminPaging" model="Model.GetCurrentPaging()"/>
+
+<div id="SingleCooperation"></div>
+<div id="DeleteCooperation"></div>
+
+@section Scripts{
+    <script>
+        function FillPageId(page) {
+            $("#PageID").val(page);
+            $("#filter-form").submit();
+        }
+
+       
+        function DeleteSchool(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/DeleteSchool/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowAddSchool() {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/AddSchool/",
+                data: null,
+                success: function(data) {
+                    $("#AddSchool").html(data);
+                    $('#AddModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function ShowDelete(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Cooperation/Delete/"+id,
+                data: id,
+                success: function(data) {
+                    $("#DeleteCooperation").html(data);
+                    $('#DeleteModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowCooperation(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/Cooperation/Show/"+id,
+                data: id,
+                success: function(data) {
+                    $("#SingleCooperation").html(data);
+                    $('#ShowModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function DeleteUser(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/user/DeleteUser/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function CloseModal() {
+            var modalToggle = document.getElementById('Modal');
+            modalToggle.hide();
+        }
+    </script>
+}
+
+
+
+

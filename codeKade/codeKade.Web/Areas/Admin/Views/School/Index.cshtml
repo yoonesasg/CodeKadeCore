@@ -1,0 +1,173 @@
+﻿@using PersianDate.Standard
+@model codeKade.DataLayer.DTOs.School.FilterSchoolDTO
+@{
+    ViewData["Title"] = "مکان های آموزشی";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="page-title m-0">@ViewData["Title"]</h4>
+                </div>
+
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end page-title-box -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title"> جستجوی مکان های آموزشی </h4>
+
+                <form asp-area="Admin" asp-controller="School" asp-action="Index" method="get" id="filter-form">
+                    <input type="hidden" asp-for="PageID" id="PageID"/>
+                    <div class="form-group col-6">
+                        <label> نام</label>
+                        <input class="form-control" type="text" placeholder="برای مثال : کد کده" asp-for="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="جستجو"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div> <!-- end col -->
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <a onclick="ShowAddSchool()" class="btn btn-primary text-white">افزودن مکان آموزشی جدید</a>
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>عنوان </th>
+                                <th>آدرس </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Schools.Count == 0)
+                            {
+                                <div class="alert alert-warning">
+                                    <p><i class="dripicons-warning"></i>   متاسفانه مکان آموزشی پیدا نشد</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @foreach (var singleSchool in Model.Schools)
+                                {
+                                    <tr id="@singleSchool.ID">
+                                        <th scope="row">@singleSchool.ID</th>
+                                        <td>@singleSchool.Name</td>
+                                        <td>@singleSchool.Address</td>
+                                        <td>
+                                            <a onclick="ShowStudents(@singleSchool.ID)" class="btn btn-secondary text-white">ثبت نام ها</a>
+                                            <a onclick="ShowEditSchool(@singleSchool.ID)" class="btn btn-warning text-white">ویرایش</a>
+                                            <a onclick="DeleteSchool(@singleSchool.ID)" class="btn btn-danger text-white">حذف</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+
+<partial name="_AdminPaging" model="Model.GetCurrentPaging()"/>
+
+<div id="AddSchool"></div>
+<div id="EditSchool"></div>
+<div id="Students"></div>
+
+@section Scripts{
+    <script>
+        function FillPageId(page) {
+            $("#PageID").val(page);
+            $("#filter-form").submit();
+        }
+
+       
+        function DeleteSchool(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/DeleteSchool/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowAddSchool() {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/AddSchool/",
+                data: null,
+                success: function(data) {
+                    $("#AddSchool").html(data);
+                    $('#AddModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function ShowEditSchool(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/EditSchool/"+id,
+                data: id,
+                success: function(data) {
+                    $("#EditSchool").html(data);
+                    $('#EditModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+
+        function ShowStudents(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/School/Students/"+id,
+                data: id,
+                success: function(data) {
+                    $("#Students").html(data);
+                    $('#StudentModal').modal('toggle');
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function DeleteUser(id) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/user/DeleteUser/"+id,
+                data: id,
+                success: function(data) {
+                    $("#"+data).hide(1000);
+                },
+                error: function(errorData) { onError(errorData); }
+            });
+        }
+        function CloseModal() {
+            var modalToggle = document.getElementById('Modal');
+            modalToggle.hide();
+        }
+    </script>
+}
+
+

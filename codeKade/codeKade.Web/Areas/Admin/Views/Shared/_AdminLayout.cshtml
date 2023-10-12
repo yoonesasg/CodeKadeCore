@@ -1,0 +1,228 @@
+﻿@using codeKade.Application.PathExtentions
+@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>کد کده | @ViewData["Title"]</title>
+    <meta content="Admin Dashboard" name="description" />
+    <meta content="ThemeDesign" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+    <!-- morris css -->
+    <link rel="stylesheet" href="../plugins/morris/morris.css">
+
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/notifications.css">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    @RenderSection("Links" , false)
+</head>
+
+
+<body class="fixed-left">
+
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                <i class="mdi mdi-close"></i>
+            </button>
+
+            <div class="left-side-logo d-block d-lg-none">
+                <div class="text-center">
+
+                    <a href="index.html" class="logo"><img src="/assets/images/logo_dark.png" height="20" alt="logo"></a>
+                </div>
+            </div>
+
+            <div class="sidebar-inner slimscrollleft">
+
+                <div id="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">اصلی</li>
+
+                        <li>
+                            <a href="/admin" class="waves-effect">
+                                <i class="dripicons-home"></i>
+                                <span> داشبورد </span>
+                            </a>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-user"></i> <span> کاربران </span><span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a asp-area="Admin" asp-controller="User" asp-action="Index"><i class="dripicons-user-group"></i> همه کاربران</a></li>
+                                <li><a asp-area="Admin" asp-controller="User" asp-action="TodayUsers"><i class="dripicons-checkmark"></i> کاربران امروز </a></li>
+                                <li><a asp-area="Admin" asp-controller="User" asp-action="DeletedUsers"><i class="dripicons-document-remove"></i> کاربران حذف شده </a></li>
+                                <li><a asp-area="Admin" asp-controller="Role" asp-action="Index"><i class="dripicons-contract"></i> نقش ها </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-bookmark"></i> <span> رویداد ها </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a asp-area="Admin" asp-controller="Event" asp-action="Index">همه رویداد ها</a></li>
+                                <li><a asp-area="Admin" asp-controller="Event" asp-action="DeletedEvents"><i class="dripicons-document-remove"></i> رویداد های حذف شده </a></li>
+                                <li><a asp-area="Admin" asp-controller="Event" asp-action="Add"><i class="dripicons-plus"></i> رویداد جدید </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-location"></i> <span> مکان های آموزشی </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a asp-area="Admin" asp-controller="School" asp-action="Index"> همه مکان های آموزشی </a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-archive"></i> <span> درخواست های همکاری </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a asp-area="Admin" asp-controller="Cooperation" asp-action="Index"> همه درخواست ها </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-pencil"></i> <span> دوره ها </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="advanced-rating.html"> همه دوره ها </a></li>
+                                <li><a href="advanced-rating.html"><i class="dripicons-plus"></i> دوره جدید </a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-blog"></i> <span> مقالات </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <ul class="list-unstyled">
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="Index"><i class="dripicons-document"></i> همه مقالات </a></li>
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="Categories"><i class="dripicons-code"></i> دسته بندی ها </a></li>
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="DeletedBlogs"><i class="dripicons-document"></i> مقالات حذف شده </a></li>
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="Add"><i class="dripicons-plus"></i> مقاله جدید </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div> <!-- end sidebarinner -->
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- Start right Content here -->
+
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+                <!-- Top Bar Start -->
+                <div class="topbar">
+
+                    <div class="topbar-left	d-none d-lg-block">
+                        <div class="text-center">
+                            <a href="index.html" class="logo"><img src="/assets/images/logo.png" height="22" alt="logo"></a>
+                        </div>
+                    </div>
+
+                    <nav class="navbar-custom">
+
+                        
+
+                        <ul class="list-inline float-right mb-0">
+                          
+
+
+                            <li class="list-inline-item dropdown notification-list nav-user">
+                                <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#" role="button"
+                                   aria-haspopup="false" aria-expanded="false">
+                                    <img src="@(PathTools.UserImagePath + User.FindFirstValue("Avatar"))" alt="user" class="rounded-circle">
+                                    <span class="d-none d-md-inline-block ml-1">@User.Identity.Name <i class="mdi mdi-chevron-down"></i> </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown">
+                                    <a class="dropdown-item" href="/user"><i class="dripicons-exit text-muted"></i> پنل کاربری</a>
+                                    <a class="dropdown-item" href="/logout"><i class="dripicons-exit text-muted"></i> خروج</a>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="list-inline-item">
+                                <button type="button" class="button-menu-mobile open-left waves-effect">
+                                    <i class="mdi mdi-menu"></i>
+                                </button>
+                            </li>
+                            
+
+                        </ul>
+
+                    </nav>
+
+                </div>
+                <!-- Top Bar End -->
+
+                <div class="page-content-wrapper ">
+
+                    <div class="container-fluid">
+
+                        @RenderBody()
+                       
+
+                    </div><!-- container fluid -->
+
+                </div> <!-- Page content Wrapper -->
+
+            </div> <!-- content -->
+
+            <footer class="footer">
+                
+            </footer>
+
+        </div>
+        <!-- End Right content here -->
+
+    </div>
+    <!-- END wrapper -->
+    <!-- jQuery  -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/modernizr.min.js"></script>
+    <script src="/assets/js/detect.js"></script>
+    <script src="/assets/js/fastclick.js"></script>
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <script src="/assets/js/jquery.blockUI.js"></script>
+    <script src="/assets/js/waves.js"></script>
+    <script src="/assets/js/jquery.nicescroll.js"></script>
+<script src="/assets/js/jquery.scrollTo.min.js"></script>
+<script src="/js/notifications.js"></script>
+
+    <!--Morris Chart-->
+    <script src="/plugins/morris/morris.min.js"></script>
+    <script src="/plugins/raphael/raphael.min.js"></script>
+
+    <!-- dashboard js -->
+    <script src="/assets/pages/dashboard.int.js"></script>
+
+    <!-- App js -->
+<script src="/assets/js/app.js"></script>
+<script src="/js/custom.js"></script>
+<partial name="_SiteMessages" />
+@RenderSection("Scripts" , false)
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\bin\Debug\net6.0\codeKade.DataLayer.deps.json
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\bin\Debug\net6.0\codeKade.DataLayer.runtimeconfig.json
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\bin\Debug\net6.0\codeKade.DataLayer.dll
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\bin\Debug\net6.0\codeKade.DataLayer.pdb
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.csproj.AssemblyReference.cache
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.AssemblyInfoInputs.cache
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.AssemblyInfo.cs
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.dll
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\refint\codeKade.DataLayer.dll
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.pdb
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\codeKade.DataLayer.genruntimeconfig.cache
+C:\Users\yoone\OneDrive\Desktop\codeKade\codeKade\codeKade.DataLayer\obj\Debug\net6.0\ref\codeKade.DataLayer.dll

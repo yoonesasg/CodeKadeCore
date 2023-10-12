@@ -1,0 +1,61 @@
+﻿@{
+    List<long> SelectedPermissions = ViewBag.RolePermissions as List<long>;
+}
+@model List<codeKade.DataLayer.Entities.Permissions.Permission>
+
+
+<div class="modal fade" id="ListModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">لیست دسترسی ها</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Permissions" method="post">
+                    <input type="hidden" name="ID" value="@ViewBag.RoleId"/>
+
+                    @if (Model.Count != 0)
+                    {
+                        @foreach (var permission in Model.Where(p => p.ParentId == null))
+                        {
+                            <div class="form-group">
+                                <input type="checkbox" name="SelectedPermission" value="@permission.ID" @(SelectedPermissions.Any(p=>p == permission.ID) ? "checked" : "")/> @permission.PermissionTitle
+                                @if (Model.Any(p => p.ParentId == permission.ID))
+                                {
+                                    <ul class="pr-5 list-unstyled">
+                                        @foreach (var child in Model.Where(p => p.ParentId == permission.ID))
+                                        {
+                                            <li>
+                                                <input type="checkbox" name="SelectedPermission" value="@child.ID" @(SelectedPermissions.Any(p=>p == child.ID) ? "checked" : "")/> @child.PermissionTitle
+                                                @if (Model.Any(p => p.ParentId == child.ID))
+                                                {
+                                                    <ul>
+                                                        @foreach (var child2 in Model.Where(p => p.ParentId == child.ID))
+                                                        {
+                                                            <li>
+                                                                <input type="checkbox" name="SelectedPermission" value="@child2.ID" @(SelectedPermissions.Any(p=>p == child2.ID) ? "checked" : "")/> @child2.PermissionTitle
+                                                            </li>
+                                                        }
+
+                                                    </ul>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        }
+                    }
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary text-white" value="ثبت"/>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
