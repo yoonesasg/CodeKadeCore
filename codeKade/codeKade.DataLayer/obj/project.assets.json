@@ -1933,19 +1933,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yoone\\.nuget\\packages\\": {}
+    "C:\\Users\\Yoones\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yoone\\OneDrive\\Desktop\\codeKade\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
+      "projectUniqueName": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
       "projectName": "codeKade.DataLayer",
-      "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codeKade\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
-      "packagesPath": "C:\\Users\\yoone\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codeKade\\codeKade\\codeKade.DataLayer\\obj\\",
+      "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
+      "packagesPath": "C:\\Users\\Yoones\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yoone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Yoones\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

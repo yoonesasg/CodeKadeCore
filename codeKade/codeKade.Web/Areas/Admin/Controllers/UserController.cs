@@ -16,13 +16,13 @@ namespace codeKade.Web.Areas.Admin.Controllers
             _roleService = roleService;
         }
 
-        [PermissionChecker(1)]
+        [PermissionChecker(36)]
         public async Task<IActionResult> Index(FilterUserDTO filter)
         {
             return View(await _userService.GetUsersList(filter));
         }
 
-        [PermissionChecker(1)]
+        [PermissionChecker(36)]
         public async Task<IActionResult> GetUserDetail(long id)
         {
             if (id == 0)
@@ -32,13 +32,13 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return PartialView("_UserDetail", await _userService.GetById(id));
         }
 
-        [PermissionChecker(4)]
+        [PermissionChecker(37)]
         public async Task<IActionResult> AddUser()
         {
             return PartialView("_AddUser");
         }
 
-        [PermissionChecker(5)]
+        [PermissionChecker(38)]
         public async Task<IActionResult> EditUser(long id)
         {
             var user = await _userService.GetById(id);
@@ -53,7 +53,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return PartialView("_EditUser", editDetail);
         }
 
-        [PermissionChecker(10002)]
+        [PermissionChecker(39)]
         public async Task<IActionResult> UserRoles(long id)
         {
             ViewBag.UserId = id;
@@ -109,7 +109,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "User", new { area = "Admin" });
         }
 
-        [PermissionChecker(6)]
+        [PermissionChecker(40)]
         public async Task<IActionResult> DeleteUser(long id)
         {
             if (id == 0)
@@ -130,14 +130,14 @@ namespace codeKade.Web.Areas.Admin.Controllers
         }
 
 
-        [PermissionChecker(8)]
+        [PermissionChecker(36)]
         public async Task<IActionResult> TodayUsers(FilterUserDTO filter)
         {
             var users = await _userService.GetTodayUsers(filter);
             return View(users);
         }
 
-        [PermissionChecker(7)]
+        [PermissionChecker(41)]
         public async Task<IActionResult> DeletedUsers(FilterUserDTO filter)
         {
             var users = await _userService.GetDeletedUsers(filter);
@@ -145,7 +145,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View(users);
         }
 
-        [PermissionChecker(7)]
+        [PermissionChecker(42)]
         public async Task<IActionResult> ReturnDeletedUser(long id)
         {
             var res = await _userService.ReturnDeletedUser(id);

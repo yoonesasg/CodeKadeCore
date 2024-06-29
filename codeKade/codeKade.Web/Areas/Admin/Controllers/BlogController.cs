@@ -15,20 +15,20 @@ namespace codeKade.Web.Areas.Admin.Controllers
             _blogService = blogService;
         }
 
-        [PermissionChecker(21)]
+        [PermissionChecker(7)]
         public async Task<IActionResult> Index(FilterBlogDTO filter)
         {
             var blogs = await _blogService.GetAll(filter);
             return View(blogs);
         }
 
-        [PermissionChecker(24)]
+        [PermissionChecker(8)]
         public async Task<IActionResult> DeletedBlogs(FilterBlogDTO filter)
         {
             return View(await _blogService.GetDeletedBlogs(filter));
         }
 
-        [PermissionChecker(22)]
+        [PermissionChecker(9)]
         public async Task<IActionResult> Add()
         {
             ViewBag.Categories = await _blogService.GetCategories();
@@ -56,6 +56,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View();
         }
 
+        [PermissionChecker(10)]
         public async Task<IActionResult> Edit(long id)
         {
             ViewBag.Categories = await _blogService.GetCategories();
@@ -92,7 +93,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View(edit);
         }
 
-        [PermissionChecker(25)]
+        [PermissionChecker(13)]
         public async Task<IActionResult> Delete(long id)
         {
             var res = await _blogService.DeleteBlog(id);
@@ -106,7 +107,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             }
         }
 
-        [PermissionChecker(24)]
+        [PermissionChecker(14)]
         public async Task<IActionResult> Restore(long id)
         {
             var res = await _blogService.RestoreBlog(id);

@@ -16,7 +16,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             _eventService = eventService;
         }
 
-        [PermissionChecker(2)]
+        [PermissionChecker(15)]
         public async Task<IActionResult> Index(FilterEventDTO filter)
         {
             await _eventService.DisActivePastEvents(DateTime.Now);
@@ -24,7 +24,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View(events);
         }
 
-        [PermissionChecker(11)]
+        [PermissionChecker(16)]
         public IActionResult Add()
         {
             return View();
@@ -59,14 +59,14 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View(add);
         }
 
-        [PermissionChecker(10)]
+        [PermissionChecker(17)]
         public async Task<IActionResult> DeletedEvents(FilterEventDTO filter)
         {
             var events = await _eventService.GetDeletedBlogs(filter);
             return View(events);
         }
 
-        [PermissionChecker(13)]
+        [PermissionChecker(18)]
         public async Task<IActionResult> Delete(long id)
         {
             var res = await _eventService.DeleteEvent(id);
@@ -80,7 +80,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             }
         }
 
-        [PermissionChecker(10)]
+        [PermissionChecker(19)]
         public async Task<IActionResult> Restore(long id)
         {
             var res = await _eventService.RestoreEvent(id);
@@ -94,7 +94,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             }
         }
 
-        [PermissionChecker(12)]
+        [PermissionChecker(21)]
         public async Task<IActionResult> Edit(long id)
         {
             var Event = await _eventService.GetForEdit(id);
@@ -135,7 +135,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [PermissionChecker(14)]
+        [PermissionChecker(23)]
         public async Task<IActionResult> EventRegisters(long? id,FilterEventBuyDTO filter)
         {
             if (id == null && filter.EventId == null)
@@ -154,7 +154,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return View(data);
         }
 
-        [PermissionChecker(10008)]
+        [PermissionChecker(24)]
         public async Task<IActionResult> DeleteEventBuy(long id)
         {
             if (id == null)

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Web\\codeKade.Web.csproj": {}
+    "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Web\\codeKade.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\codeKade.Application.csproj": {
+    "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\codeKade.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\codeKade.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\codeKade.Application.csproj",
         "projectName": "codeKade.Application",
-        "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\codeKade.Application.csproj",
-        "packagesPath": "C:\\Users\\yoone\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\obj\\",
+        "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\codeKade.Application.csproj",
+        "packagesPath": "C:\\Users\\Yoones\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yoone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yoones\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj"
+              "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
+                "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj"
               }
             }
           }
@@ -72,17 +72,17 @@
         }
       }
     },
-    "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
+    "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
         "projectName": "codeKade.DataLayer",
-        "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
-        "packagesPath": "C:\\Users\\yoone\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\obj\\",
+        "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Yoones\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yoone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yoones\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -146,17 +146,17 @@
         }
       }
     },
-    "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Web\\codeKade.Web.csproj": {
+    "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Web\\codeKade.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Web\\codeKade.Web.csproj",
+        "projectUniqueName": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Web\\codeKade.Web.csproj",
         "projectName": "codeKade.Web",
-        "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Web\\codeKade.Web.csproj",
-        "packagesPath": "C:\\Users\\yoone\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Web\\obj\\",
+        "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Web\\codeKade.Web.csproj",
+        "packagesPath": "C:\\Users\\Yoones\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yoone\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Yoones\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -170,11 +170,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\codeKade.Application.csproj": {
-                "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.Application\\codeKade.Application.csproj"
+              "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\codeKade.Application.csproj": {
+                "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.Application\\codeKade.Application.csproj"
               },
-              "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
-                "projectPath": "C:\\Users\\yoone\\OneDrive\\Desktop\\codekade\\CodeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj"
+              "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj": {
+                "projectPath": "C:\\Users\\Yoones\\Desktop\\CodeKadeCore\\codeKade\\codeKade.DataLayer\\codeKade.DataLayer.csproj"
               }
             }
           }

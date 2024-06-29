@@ -17,14 +17,14 @@ namespace codeKade.Web.Areas.Admin.Controllers
             _userService = userService;
         }
 
-        [PermissionChecker(15)]
+        [PermissionChecker(31)]
         public async Task<IActionResult> Index(FilterSchoolDTO filter)
         {
             var data = await _schoolService.GetAllFilter(filter);
             return View(data);
         }
 
-        [PermissionChecker(17)]
+        [PermissionChecker(32)]
         public IActionResult AddSchool()
         {
             return PartialView("_AddSchool");
@@ -41,7 +41,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return Json(id);
         }
 
-        [PermissionChecker(18)]
+        [PermissionChecker(34)]
         public async Task<IActionResult> EditSchool(long id)
         {
             var school = await _schoolService.GetSchoolById(id);
@@ -66,7 +66,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "School", new { Area = "Admin" });
         }
 
-        [PermissionChecker(20)]
+        [PermissionChecker(35)]
         public async Task<IActionResult> Students(long id)
         {
             if (id == 0)

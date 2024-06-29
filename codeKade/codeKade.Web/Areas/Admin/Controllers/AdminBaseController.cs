@@ -6,7 +6,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize]
-    [PermissionChecker(10009)]
+    [PermissionChecker(6)]
     public class AdminBaseController : Controller
     {
         protected string ErrorMessage = "ErrorMessage";

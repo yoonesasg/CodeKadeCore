@@ -14,14 +14,14 @@ namespace codeKade.Web.Areas.Admin.Controllers
             _roleService = roleService;
         }
 
-        [PermissionChecker(10003)]
+        [PermissionChecker(25)]
         public async Task<IActionResult> Index()
         {
             var model = await _roleService.GetRoles();
             return View(model);
         }
 
-        [PermissionChecker(10004)]
+        [PermissionChecker(27)]
         public IActionResult AddRole()
         {
             return PartialView("_AddRole");
@@ -42,7 +42,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "Role", new { Area = "Admin" });
         }
 
-        [PermissionChecker(10006)]
+        [PermissionChecker(28)]
         public async Task<IActionResult> EditRole(long id)
         {
             ViewBag.RoleId = id;
@@ -64,7 +64,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "Role", new { Area = "Admin" });
         }
 
-        [PermissionChecker(10007)]
+        [PermissionChecker(29)]
         public async Task<IActionResult> DeleteRole(long id)
         {
             if (id != 0)
@@ -79,7 +79,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
             }
         }
 
-        [PermissionChecker(10005)]
+        [PermissionChecker(30)]
         public async Task<IActionResult> Permissions(long id)
         {
             ViewBag.RoleId = id;
@@ -89,7 +89,7 @@ namespace codeKade.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [PermissionChecker(10005)]
+        [PermissionChecker(30)]
         public async Task<IActionResult> Permissions(long ID, List<long> SelectedPermission)
         {
             await _roleService.AddPermissionsToRole(ID, SelectedPermission);
